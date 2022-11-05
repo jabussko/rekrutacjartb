@@ -24,7 +24,8 @@ function onClick(button) {
 }
 
 function startCountDown(countDownDate) {
-    const repeater = () => {
+    const banner = document.getElementById("counter"),
+    repeater = () => {
         setTimeout(() => {
             let now = new Date().getTime(),
                 distance = countDownDate - now,
@@ -32,11 +33,14 @@ function startCountDown(countDownDate) {
                 hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
                 minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
                 seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById("counter").innerHTML = (days ? days + "d " : "") + (hours ? hours + "h " : "")
+            banner.innerHTML = (days ? days + "d " : "") + (hours ? hours + "h " : "")
                 + (minutes ? minutes + "m " : "") + (seconds ? seconds + "s " : "");
 
             if (distance < 0) {
-                document.getElementById("counter").innerHTML = "Promocja zakończona";
+                banner.innerHTML = "Promocja zakończona";
+                return;
+            }
+            if (banner.classList.contains("hidden-task")) {
                 return;
             }
             repeater();
