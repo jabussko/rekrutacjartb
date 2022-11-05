@@ -1,5 +1,5 @@
 function onClick(button) {
-    var buttonId = button.id, bannerOffers;
+    let buttonId = button.id, bannerOffers;
     switch (buttonId) {
         case '1':
             bannerOffers = document.getElementById('bannerGridOffers');
@@ -15,8 +15,8 @@ function onClick(button) {
             break;
         case '3':
             const now = new Date();
-            var countDownDate = now.setDate(now.getDate() + 7);
-            // var countDownDate = now.setMinutes ( now.getMinutes() + 1 );
+            let countDownDate = now.setDate(now.getDate() + 7);
+            // let countDownDate = now.setMinutes ( now.getMinutes() + 1 );
             this.setClass("counter", "hidden-task", "task-wrapper");
             this.startCountDown(countDownDate);
             break;
@@ -26,7 +26,7 @@ function onClick(button) {
 function startCountDown(countDownDate) {
        const repeater = () => {
         setTimeout(() => {
-            var now = new Date().getTime(),
+            let now = new Date().getTime(),
                 distance = countDownDate - now,
                 days = Math.floor(distance / (1000 * 60 * 60 * 24)),
                 hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
@@ -78,11 +78,11 @@ function setActiveElement(numberOfIterations, timeBetweenItereation, bannerType)
 }
 
 function setClass(elementId, classToSet, allElementsClass = null) {
-    var actualElement = document.getElementById(elementId);
+    let actualElement = document.getElementById(elementId);
 
     //inne rozwiązania ukrywamy
     if (allElementsClass) {
-        var elementNodeList = document.getElementsByClassName(allElementsClass),
+        let elementNodeList = document.getElementsByClassName(allElementsClass),
             elements = Array.prototype.map.call(elementNodeList, function (element) {
                 return element;
             });
@@ -97,9 +97,8 @@ function setClass(elementId, classToSet, allElementsClass = null) {
 }
 
 function setBanner(bannerType, offersAmount, bannerOffers) {
-    const contentWrapper = document.getElementById('task-content'),
-        currencies = {"PLN": "zł"};
-    var offersContent = '', offersCounter = 0;
+    const currencies = {"PLN": "zł"};
+    let offersContent = '', offersCounter = 0;
     this.getBannerData().then(data => {
         if (data.offers) {
             // jeśli dostaniemy oferty
@@ -130,7 +129,7 @@ function setBanner(bannerType, offersAmount, bannerOffers) {
 }
 
 function getBannerData() {
-    var bannerData = null;
+    let bannerData = null;
     return fetch('https://cors-anywhere.herokuapp.com/rekrutacjartb.pl/developer/banner.json')
         .then(response => {
             if (!response.ok) {
