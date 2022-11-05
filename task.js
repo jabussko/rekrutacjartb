@@ -133,7 +133,7 @@ function setBanner(bannerType, offersAmount, bannerOffers) {
 }
 
 function getBannerData() {
-    let bannerData = null;
+    // workaround for accessing json file behind cors policy
     return fetch('https://cors-anywhere.herokuapp.com/rekrutacjartb.pl/developer/banner.json')
         .then(response => {
             if (!response.ok) {
