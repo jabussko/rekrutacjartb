@@ -24,7 +24,7 @@ function onClick(button) {
 }
 
 function startCountDown(countDownDate) {
-       const repeater = () => {
+    const repeater = () => {
         setTimeout(() => {
             let now = new Date().getTime(),
                 distance = countDownDate - now,
@@ -40,7 +40,7 @@ function startCountDown(countDownDate) {
                 return;
             }
             repeater();
-        }, 1000 );
+        }, 1000);
     };
     repeater();
 }
@@ -80,7 +80,7 @@ function setActiveElement(numberOfIterations, timeBetweenItereation, bannerType)
 function setClass(elementId, classToSet, allElementsClass = null) {
     let actualElement = document.getElementById(elementId);
 
-    //inne rozwiązania ukrywamy
+    //remove class for others
     if (allElementsClass) {
         let elementNodeList = document.getElementsByClassName(allElementsClass),
             elements = Array.prototype.map.call(elementNodeList, function (element) {
@@ -92,7 +92,7 @@ function setClass(elementId, classToSet, allElementsClass = null) {
             }
         });
     }
-    //pokazujemy aktualne zadanie
+    //add class to actual element
     actualElement.classList.remove(classToSet);
 }
 
@@ -101,12 +101,12 @@ function setBanner(bannerType, offersAmount, bannerOffers) {
     let offersContent = '', offersCounter = 0;
     this.getBannerData().then(data => {
         if (data.offers) {
-            // jeśli dostaniemy oferty
+            // if there are offers
             let randomItems = data.offers.sort(() => .5 - Math.random()).slice(0, offersAmount);
             randomItems.forEach(function (item) {
                 let currency = (item.currency in currencies) ? currencies[item.currency] : item.currency,
                     price = Number(item.price).toLocaleString("fr-FR", {minimumFractionDigits: 2});
-                //dla każdej oferty ustawiamy dane do baneru
+                //setting offers in banner
                 if (bannerType === 'grid') {
                     offersContent += "<div id=\"bannerGrid" + offersCounter + "\" class=\"banner-offer not-highlight-element\">" +
                         "<img src=\"http:" + item.imgURL + "\" class=\"banner-offer-photo\">" +
@@ -138,7 +138,6 @@ function getBannerData() {
             return response.json();
         })
         .catch(err => function () {
-            console.log('Error', err);
-            alert('Coś poszło nie tak: ' + err);
+            alert('Error: ' + err);
         })
 }
